@@ -23,10 +23,12 @@ body {
 
 .dish-container {
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 15px; /* Rounded corners */
     margin: 15px 0;
-    padding: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), /* Original shadow */
+    0 0 0 3px rgba(0, 0, 0, 0.1); /* Outline shadow */
+    background-color: #fff; /* White background for the card */
 }
 
 .dish-image {
@@ -34,19 +36,23 @@ body {
     height: auto;
     max-height: 300px; /* or any desired height */
     object-fit: cover;
-    border-radius: 5px;
+    border-radius: 15px; /* Same rounded corners for the image */
 }
 
 .dish-title {
     font-size: 1.5em;
     margin-bottom: 10px;
+    text-align: center; /* Center text */
 }
 
 .dish-price {
     font-size: 1.2em;
     margin-bottom: 10px;
+    text-align: center; /* Center text */
 }
 
 .dish-button {
+    display: flex;
+    justify-content: center;
     margin-top: 10px;
 }
