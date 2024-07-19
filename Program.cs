@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Data;
+using Menu.Data;
+
 namespace Menu
 {
     public class Program
@@ -8,6 +12,13 @@ namespace Menu
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            //connect to data base
+            builder.Services.AddDbContext<MenuContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
+
 
             var app = builder.Build();
 
