@@ -18,8 +18,12 @@
                     <div class="d-flex justify-content-center dish-price">
                         @item.Price.ToString("N2") Rupees
                     </div>
-                    <div class="d-flex justify-content-center dish-button">
+                    <div class="d-flex justify-content-center dish-buttons">
                         <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">View Dish</a>
+                        <form asp-action="Delete" method="post" onsubmit="return confirm('Are you sure you want to delete this dish?');" style="display:inline;">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
                     </div>
                 </div>
             </div>

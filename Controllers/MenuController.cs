@@ -36,6 +36,54 @@ namespace Menu.Controllers
             return View(dish);
         }
 
+        public IActionResult Index1()
+        {
+            return View();
+        }
+
+
+        public IActionResult Create()
+        {
+            ViewBag.Ingredients = _menuContext.Ingredients.ToList();
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Dish dish, List<int> selectedIngredients)
+        {
+            if (ModelState.IsValid)
+            {
+                foreach (var ingredientId in selectedIngredients)
+                {
+                    dish.DishIngredients.Add(new DishIngredient { IngredientId = ingredientId });
+                }
+
+                _menuContext.Add(dish);
+                await _menuContext.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Dish added successfully!";
+                return RedirectToAction(nameof(Create));
+            }
+            ViewBag.Ingredients = _menuContext.Ingredients.ToList();
+            return View(dish);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var dish = await _menuContext.Dishes.FindAsync(id);
+            if (dish == null)
+            {
+                return NotFound();
+            }
+
+            _menuContext.Dishes.Remove(dish);
+            await _menuContext.SaveChangesAsync();
+            TempData["SuccessMessage"] = "Dish deleted successfully!";
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
     

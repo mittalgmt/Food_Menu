@@ -1,0 +1,50 @@
+﻿@model Menu.Models.Dish
+@{
+    ViewData["Title"] = "Create Dish";
+    var ingredients = ViewBag.Ingredients as List<Menu.Models.Ingredient>;
+}
+
+<div class="create-container">
+    <h1>Create Dish</h1>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    <form asp-action="Create">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ImagUrl" class="control-label"></label>
+            <input asp-for="ImagUrl" class="form-control" />
+            <span asp-validation-for="ImagUrl" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Price" class="control-label"></label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Ingredients</label>
+            <select asp-for="DishIngredients" class="form-control" multiple="multiple">
+                @foreach (var ingredient in ingredients)
+                {
+                    <option value="@ingredient.IngredientId">@ingredient.IngredientName</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>
